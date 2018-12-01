@@ -38,17 +38,17 @@ layui.use(['layim', 'jquery', 'laytpl'], function (layim) {
                 success: function (data) {
                     data = JSON.parse(data);
                     if (data.code < 0) {
-                        window.location.href = "/static/login.html";
+                        window.location.href = "login.html";
                     } else {
                         auth_token = data.data;
                     }
                 },
                 error: function (data) {
-                    window.location.href = "/static/login.html";
+                    window.location.href = "login.html";
                 }
             });
 
-            socket = io.connect('http://192.168.0.33:9006', {
+            socket = io.connect('http://localhost:3000', {
                 query: 'auth_token=' + auth_token,
                 timeout: 15000,
                 autoConnect: true,
@@ -68,7 +68,7 @@ layui.use(['layim', 'jquery', 'laytpl'], function (layim) {
             // example code
             let gps_data;
 
-            protobuf.load("/static/protobuf/gps_data.proto", function (err, root) {
+            protobuf.load("protobuf/gps_data.proto", function (err, root) {
                 if (err) throw err;
                 gps_data = root.lookupType("gps_data");
                 let message = gps_data.create({dataTime: "2018-07-03", terminalId: "222 你好"});
@@ -283,9 +283,9 @@ layui.use(['layim', 'jquery', 'laytpl'], function (layim) {
         , notice: true //是否开启桌面消息提醒，默认false
         , voice: 'default.wav' //声音提醒，默认开启，声音文件为：default.wav
 
-        , msgbox: '/static/html/msgbox.html' //消息盒子页面地址，若不开启，剔除该项即可
-        , find: '/static/html/find.html' //发现页面地址，若不开启，剔除该项即可
-        , chatLog: '/static/html/chatlog.html' //聊天记录页面地址，若不开启，剔除该项即可
+        , msgbox: 'html/msgbox.html' //消息盒子页面地址，若不开启，剔除该项即可
+        , find: 'html/find.html' //发现页面地址，若不开启，剔除该项即可
+        , chatLog: 'html/chatlog.html' //聊天记录页面地址，若不开启，剔除该项即可
     });
 
     //监听在线状态的切换事件
@@ -337,7 +337,7 @@ layui.use(['layim', 'jquery', 'laytpl'], function (layim) {
                 title: "修改个人信息",
                 skin: 'layui-layer-rim',
                 area: ['500px', '550px'],
-                content: '/static/html/userinfo.html'
+                content: 'html/userinfo.html'
             });
         });
 
@@ -541,7 +541,7 @@ layui.use(['layim', 'jquery', 'laytpl'], function (layim) {
                 area: ['500px', '300px'],
                 scrollbar: false,
                 maxWidth: "400px",
-                content: '/static/html/friend.html?' + params
+                content: 'html/friend.html?' + params
             });
         },
         //退出群

@@ -1501,7 +1501,7 @@ layui.define(['layer', 'laytpl', 'upload', 'flow'], function(exports){
 		  title: "查找",
 		  skin: 'layui-layer-rim',
 		  area: ['610px', '500px'],
-		  content: '/static/html/find.html'
+		  content: 'html/find.html'
 	  });
     }
 
@@ -1529,7 +1529,7 @@ layui.define(['layer', 'laytpl', 'upload', 'flow'], function(exports){
   		  title: "设置",
   		  skin: 'layui-layer-rim',
   		  area: ['610px', '500px'],
-  		  content: '/static/html/setting.html'
+  		  content: 'html/setting.html'
   	  });
     }
 

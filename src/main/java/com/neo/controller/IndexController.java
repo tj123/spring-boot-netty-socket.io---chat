@@ -14,8 +14,8 @@ public class IndexController extends BaseController {
     @RequestMapping("/")
     public String index(HttpSession session) {
         if (session.getAttribute("username") != null) {
-            return "static/index.html";
+            return "index.html";
         }
-        return "static/login.html";
+        return "login.html";
     }
 }

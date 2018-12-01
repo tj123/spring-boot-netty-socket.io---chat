@@ -2,11 +2,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>LayIM 登陆</title>
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="/static/css/login/style3.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/login/animate-custom.css">
-    <link rel="stylesheet" href="/static/layui/css/layui.css">
-    <script src="/static/layui/layui.js"></script>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/login/style3.css">
+    <link rel="stylesheet" type="text/css" href="css/login/animate-custom.css">
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.js"></script>
 </head>
 <body>
 <div class="container">
@@ -68,7 +68,7 @@
                         layer.msg(data.msg);
                         $("#password").val("");
                     } else if (data.code === 1) {
-                        window.location.href = "/static/index.html";
+                        window.location.href = "index.html";
                     }
                 },
                 error: function (data) {

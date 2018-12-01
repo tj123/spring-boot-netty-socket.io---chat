@@ -88,7 +88,7 @@ public class UserController extends BaseController<UserEntity> {
     @RequestMapping(value = "/logout")
     public String logout() {
         session.invalidate();
-        return "/static/index.html";
+        return "index.html";
     }
 
 
@@ -188,7 +188,8 @@ public class UserController extends BaseController<UserEntity> {
         InetAddress addr = InetAddress.getLocalHost();
         String ip = addr.getHostAddress();//获得本机IP
         JSONObject obj = new JSONObject();
-        obj.put("src", "http://" + ip + ":" + port + "/static/" + uuid + fileName);
+//        obj.put("src", "http://" + ip + ":" + port + "/static/" + uuid + fileName);
+        obj.put("src", "http://" + ip + ":" + port + "/" + uuid + fileName);
         //返回json
         return retResultData(0, "", obj);
     }

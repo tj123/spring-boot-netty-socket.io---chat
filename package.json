@@ -10,7 +10,7 @@
     "clean": "gulp clean",
     "task-dev": "yarn dev",
     "task-build": "yarn build",
-    "r":"http-server app -P http://localhost:8080"
+    "r":"http-server -p 8082 app -P http://localhost:8080"
   },
   "devDependencies": {
     "babel-core": "^6.4.0",
