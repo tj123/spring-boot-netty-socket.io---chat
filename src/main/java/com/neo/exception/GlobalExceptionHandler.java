@@ -40,24 +40,24 @@ public class GlobalExceptionHandler {
     }
 
     private void log(Exception ex, HttpServletRequest request) {
-        logger.error("有异常啦：============》" + ex.getMessage());
-        logger.error("************************异常开始*******************************");
-//        if(getUser() != null)
-//            logger.error("当前用户id是" + getUser().getUserId());
-        logger.error(ex);
-        logger.error("请求地址：" + request.getRequestURL());
-        Enumeration enumeration = request.getParameterNames();
-        logger.error("请求参数：");
-        while (enumeration.hasMoreElements()) {
-            String name = enumeration.nextElement().toString();
-            logger.error(name + "---" + request.getParameter(name));
-        }
-
-        StackTraceElement[] error = ex.getStackTrace();
-        for (StackTraceElement stackTraceElement : error) {
-            logger.error(stackTraceElement.toString());
-        }
-        logger.error("************************异常结束*******************************");
+//        logger.error("有异常啦：============》" + ex.getMessage());
+//        logger.error("************************异常开始*******************************");
+////        if(getUser() != null)
+////            logger.error("当前用户id是" + getUser().getUserId());
+//        logger.error(ex);
+//        logger.error("请求地址：" + request.getRequestURL());
+//        Enumeration enumeration = request.getParameterNames();
+//        logger.error("请求参数：");
+//        while (enumeration.hasMoreElements()) {
+//            String name = enumeration.nextElement().toString();
+//            logger.error(name + "---" + request.getParameter(name));
+//        }
+//
+//        StackTraceElement[] error = ex.getStackTrace();
+//        for (StackTraceElement stackTraceElement : error) {
+//            logger.error(stackTraceElement.toString());
+//        }
+        logger.error("",ex);
     }
 
 }

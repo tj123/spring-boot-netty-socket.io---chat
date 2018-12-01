@@ -1,5 +1,5 @@
- 
- 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>聊天记录</title>
 
-<link rel="stylesheet" href="/static/layui/css/layui.css">
+<link rel="stylesheet" href="../layui/css/layui.css">
 <style>
 body .layim-chat-main{height: auto;padding-bottom: 45px;}
 .lay_page{position: fixed;bottom: 0;margin: 0 10px;background: #fff;width: 100%;}
@@ -32,12 +32,12 @@ body .layim-chat-main{height: auto;padding-bottom: 45px;}
       <li class="layim-chat-mine"><div class="layim-chat-user"><img src="http://test.guoshanchina.com/uploads/person/{{ item.from }}.jpg"><cite><i>{{ item.timestamp }}</i>{{ item.fromName }}</cite></div><div class="layim-chat-text">{{ layui.layim.content(item.content) }}</div></li>
     {{# } else { }}
       <li><div class="layim-chat-user"><img src="http://test.guoshanchina.com/uploads/person/{{ item.from }}.jpg"><cite>{{ item.fromName }}<i>{{item.timestamp }}</i></cite></div><div class="layim-chat-text">{{ layui.layim.content(item.content) }}</div></li>
-    {{# } }} 
-  {{# }  
+    {{# } }}
+  {{# }
 }); }}
 </textarea>
 
-<!-- 
+<!--
 上述模版采用了 laytpl 语法，不了解的同学可以去看下文档：http://www.layui.com/doc/modules/laytpl.html
 
 -->
@@ -48,7 +48,7 @@ layui.config({
     base: '../../../../../../static/js/'
 }).extend({
     socket: 'socket'
-});       
+});
 layui.use(['layim', 'laypage','socket'], function (socket) {
   var layim = layui.layim
   ,layer = layui.layer
@@ -58,9 +58,9 @@ layui.use(['layim', 'laypage','socket'], function (socket) {
   ,cachedata = parent.layui.layim.cache()
   //开始请求聊天记录
   ,param =  location.search; //获得URL参数。该窗口url会携带会话id和type，他们是你请求聊天记录的重要凭据
-  var url = '../../../../../../'+cachedata.base.getChatLogTotal.url || {}; 
-  function formatDate(nS) { 
-   return new Date(parseInt(nS)).toLocaleString();   
+  var url = '../../../../../../'+cachedata.base.getChatLogTotal.url || {};
+  function formatDate(nS) {
+   return new Date(parseInt(nS)).toLocaleString();
   }
 
   $.get(url+'&'+param, function(data){
@@ -79,13 +79,13 @@ layui.use(['layim', 'laypage','socket'], function (socket) {
       ,curr: res.data.limit
       ,jump: function(obj, first){
         //obj包含了当前分页的所有参数，比如：
-        var url = '../../../../../../'+cachedata.base.getChatLog.url || {};    
+        var url = '../../../../../../'+cachedata.base.getChatLog.url || {};
         //首次不执行
         if(first){
           var page = res.data.limit;
         }else{
           var page = obj.curr;
-        }  
+        }
         $.get(url+'&'+param, {page: obj.curr || 1}, function(data){
             var res = eval('(' + data + ')');
             if(res.code != 0){
@@ -93,7 +93,7 @@ layui.use(['layim', 'laypage','socket'], function (socket) {
             }
             layui.each(res.data, function(index, item){
                 res.data[index]['timestamp'] =  formatDate(item.timestamp);
-            });            
+            });
             var html = laytpl(LAY_tpl.value).render({
               data: res.data
             });
@@ -101,7 +101,7 @@ layui.use(['layim', 'laypage','socket'], function (socket) {
         });
 
       }
-    });    
+    });
   });
 });
 </script>

@@ -48,7 +48,8 @@ layui.use(['layim', 'jquery', 'laytpl'], function (layim) {
                 }
             });
 
-            socket = io.connect('http://localhost:3000', {
+            // socket = io.connect('localhost:3000',{
+            socket = io.connect({
                 query: 'auth_token=' + auth_token,
                 timeout: 15000,
                 autoConnect: true,

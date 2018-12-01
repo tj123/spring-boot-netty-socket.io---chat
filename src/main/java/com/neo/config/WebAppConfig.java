@@ -36,7 +36,8 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         //注册自定义拦截器，添加拦截路径和排除拦截路径
         registry.addInterceptor(new InterceptorConfig())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/user/login", "/user/register","/");
+//                .excludePathPatterns("/user/login", "/user/register","/");
+                .excludePathPatterns("/**/*/favicon.ico","/user/login", "/user/register","/");
     }
 
     // 以下 两个方法 解决乱码问题

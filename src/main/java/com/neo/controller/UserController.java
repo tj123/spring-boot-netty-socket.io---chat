@@ -7,13 +7,18 @@ import com.neo.enums.EResultType;
 import com.neo.serivce.GroupSerivice;
 import com.neo.serivce.UserSerivice;
 import io.netty.util.internal.StringUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -118,6 +123,7 @@ public class UserController extends BaseController<UserEntity> {
      * 目前是 查询系统中的 所有人员
      * 及 自己所在的群
      * 和 创建的群
+     *
      * @return
      */
     @ResponseBody
@@ -189,9 +195,41 @@ public class UserController extends BaseController<UserEntity> {
         String ip = addr.getHostAddress();//获得本机IP
         JSONObject obj = new JSONObject();
 //        obj.put("src", "http://" + ip + ":" + port + "/static/" + uuid + fileName);
-        obj.put("src", "http://" + ip + ":" + port + "/" + uuid + fileName);
+//        obj.put("src", "http://" + ip + ":" + port + "/" + uuid + fileName);
+        obj.put("src", "/user/file/" + uuid + fileName);
         //返回json
         return retResultData(0, "", obj);
+    }
+
+
+    @GetMapping("/file/{fileName:.+}")
+    public void file(@PathVariable String fileName, HttpServletResponse response) {
+        FileInputStream fileInputStream = null;
+        ServletOutputStream outputStream = null;
+        try {
+            fileInputStream = new FileInputStream(path + fileName);
+            outputStream = response.getOutputStream();
+            byte[] cache = new byte[2048];
+            int len;
+            while ((len = fileInputStream.read(cache)) != -1) {
+                outputStream.write(cache, 0, len);
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            response.setStatus(404);
+        } finally {
+            try {
+                if (fileInputStream != null) {
+                    fileInputStream.close();
+                }
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+            } catch (IOException e) {
+                logger.error(e.getMessage(), e);
+            }
+        }
+
     }
 
 }
