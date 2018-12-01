@@ -3,6 +3,7 @@ package com.neo.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.neo.entity.GroupEntity;
 import com.neo.entity.GroupUser;
+import com.neo.entity.Result;
 import com.neo.entity.UserEntity;
 import com.neo.serivce.GroupSerivice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class GroupController extends BaseController<UserEntity> {
      */
     @ResponseBody
     @PostMapping(value = "/creat")
-    public String creatGroup(String name, String avatar) {
+    public Result creatGroup(String name, String avatar) {
         GroupEntity groupEntity = groupSerivice.creatGroup(name, avatar, getSessionUser());
         return retResultData(0, "", groupEntity);
     }
@@ -42,7 +43,7 @@ public class GroupController extends BaseController<UserEntity> {
      */
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, value = "/findGroupsByName")
-    public String findGroupsByName(String page, String name) {
+    public Result findGroupsByName(String page, String name) {
         List<GroupEntity> list = groupSerivice.findGroupsByGroupName(name);
         return retResultData(0, "", list);
     }
@@ -56,7 +57,7 @@ public class GroupController extends BaseController<UserEntity> {
      */
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, value = "/findGroupUsers")
-    public String findGroupUsers(String id) {
+    public Result findGroupUsers(String id) {
         List<GroupUser> list = groupSerivice.findUsersByGroupId(id);
         for (GroupUser user : list) {
             user.setId(user.getUser_id());

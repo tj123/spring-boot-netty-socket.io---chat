@@ -5,13 +5,13 @@ import com.neo.enums.EResultType;
 /**
  * Created by liudong on 2018/6/11.
  */
-public class Result<T> {
+public class Result {
     /*返回码*/
     private Integer code;
     /*返回信息提示*/
     private String msg;
     /*返回的数据*/
-    private T data;
+    private Object data;
 
     public Result() {
     }
@@ -21,13 +21,13 @@ public class Result<T> {
         this.msg = msg;
     }
 
-    public Result(Integer code, String msg, T data) {
+    public Result(Integer code, String msg, Object data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
     }
 
-    public Result(EResultType type,T data) {
+    public Result(EResultType type,Object data) {
         this.code = type.getCode();
         this.msg = type.getMsg();
         this.data = data;
@@ -54,11 +54,11 @@ public class Result<T> {
         this.msg = msg;
     }
 
-    public T getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(Object data) {
         this.data = data;
     }
 }

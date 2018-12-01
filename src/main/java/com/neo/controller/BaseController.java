@@ -1,6 +1,5 @@
 package com.neo.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.neo.entity.BaseEntity;
 import com.neo.entity.Result;
 import com.neo.entity.UserEntity;
@@ -18,31 +17,28 @@ public class BaseController<T extends BaseEntity> {
     HttpSession session;
 
 
-    public UserEntity getSessionUser(){
+    public UserEntity getSessionUser() {
         return (UserEntity) session.getAttribute("username");
     }
 
     protected Logger logger = LogManager.getLogger(getClass().getName());
 
 
-    protected String retResultData(EResultType type) {
-        return JSON.toJSONString(new Result(type));
+    protected Result retResultData(EResultType type) {
+        return new Result(type);
     }
 
-    protected String retResultData(EResultType type, Object data) {
-        return JSON.toJSONString(new Result(type, data));
+    protected Result retResultData(EResultType type, Object data) {
+        return new Result(type, data);
     }
 
-    protected String retResultData(Integer code, String message) {
-        return JSON.toJSONString(new Result(code, message));
+    protected Result retResultData(Integer code, String message) {
+        return new Result(code, message);
     }
 
-    protected String retResultData(Integer code, String message, Object data) {
-        return JSON.toJSONString(new Result(code, message, data));
+    protected Result retResultData(Integer code, String message, Object data) {
+        return new Result(code, message, data);
     }
-
-
-
 
 
 }

@@ -36,7 +36,6 @@ layui.use(['layim', 'jquery', 'laytpl'], function (layim) {
                 type: "GET",
                 async: false,
                 success: function (data) {
-                    data = JSON.parse(data);
                     if (data.code < 0) {
                         window.location.href = "login.html";
                     } else {

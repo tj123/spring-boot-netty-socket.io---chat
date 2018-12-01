@@ -2,12 +2,12 @@ package com.neo.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.neo.entity.Result;
 import com.neo.entity.UserEntity;
 import com.neo.enums.EResultType;
 import com.neo.serivce.GroupSerivice;
 import com.neo.serivce.UserSerivice;
 import io.netty.util.internal.StringUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -51,7 +50,7 @@ public class UserController extends BaseController<UserEntity> {
      */
     @ResponseBody
     @RequestMapping(value = "/login")
-    public String login(String name, String password) {
+    public Result login(String name, String password) {
 
         if (StringUtil.isNullOrEmpty(name) || StringUtil.isNullOrEmpty(password)) {
             return retResultData(-1, "用户名或密码不能为空");
@@ -73,7 +72,7 @@ public class UserController extends BaseController<UserEntity> {
     // 注册
     @ResponseBody
     @GetMapping(value = "/register")
-    public String register(String name, String password, String avatar) {
+    public Result register(String name, String password, String avatar) {
 
         if (StringUtil.isNullOrEmpty(name) || StringUtil.isNullOrEmpty(password)) {
             return retResultData(-1, "用户名或密码不能为空");
@@ -100,7 +99,7 @@ public class UserController extends BaseController<UserEntity> {
     //获取当前登录人的Token
     @ResponseBody
     @GetMapping(value = "/getToken")
-    public String getAuthToken() {
+    public Result getAuthToken() {
         return retResultData(EResultType.SUCCESS, getSessionUser().getAuth_token());
     }
 
@@ -108,7 +107,7 @@ public class UserController extends BaseController<UserEntity> {
     //修改 个性签名
     @ResponseBody
     @PostMapping(value = "/updateSign")
-    public String updateSign(String sign) {
+    public Result updateSign(String sign) {
 
         UserEntity entity = getSessionUser();
         entity = (UserEntity) userSerivice.getEntityById(entity.getId());
@@ -128,7 +127,7 @@ public class UserController extends BaseController<UserEntity> {
      */
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, value = "/findAllUser")
-    public String findAllUser() {
+    public Result findAllUser() {
 
         //获取所有的群组
         UserEntity userEntity = getSessionUser();
@@ -158,7 +157,7 @@ public class UserController extends BaseController<UserEntity> {
      */
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, value = "/findUsersByName")
-    public String findUsersByName(String page, String name) {
+    public Result findUsersByName(String page, String name) {
 
         List<UserEntity> list = userSerivice.findUsersByName(page, name);
         return retResultData(0, "", list);
@@ -171,7 +170,7 @@ public class UserController extends BaseController<UserEntity> {
     //文件上传
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public @ResponseBody
-    String uploadImg(@RequestParam("file") MultipartFile file,
+    Result uploadImg(@RequestParam("file") MultipartFile file,
                      HttpServletRequest request) throws UnknownHostException {
 
         if (file.isEmpty()) {

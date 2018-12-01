@@ -1,6 +1,7 @@
 package com.neo.controller;
 
 import com.neo.entity.MessageEntity;
+import com.neo.entity.Result;
 import com.neo.enums.EResultType;
 import com.neo.serivce.ChatSerivice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,13 @@ public class ChatController extends BaseController<MessageEntity> {
 
     @ResponseBody
     @RequestMapping(value = "/t")
-    public String test() {
+    public Result test() {
         return retResultData(EResultType.SUCCESS, "ks");
     }
 
     @ResponseBody
     @RequestMapping(value = "/t4")
-    public String tests() {
+    public Result tests() {
         chatSerivice.sendApnData();
         return retResultData(EResultType.SUCCESS);
     }

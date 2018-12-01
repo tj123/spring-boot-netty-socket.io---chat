@@ -1,6 +1,7 @@
 package com.neo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.neo.entity.Result;
 import com.neo.entity.UserEntity;
 import com.neo.serivce.AddMessageSerivice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class AddMessageController extends BaseController<UserEntity> {
      */
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, value = "/findAddInfo")
-    public String findAddInfo(String page) {
+    public Result findAddInfo(String page) {
         JSONObject obj = addMessageSerivice.findAddInfo(getSessionUser().getId());
         return retResultData(0, "", obj);
     }
